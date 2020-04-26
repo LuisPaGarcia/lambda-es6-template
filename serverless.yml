@@ -1,0 +1,21 @@
+service: serverless-es6
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+plugins:
+  - serverless-webpack
+
+functions:
+  news: # Create a news function which gets triggered by a http event
+    handler: handler.main
+    events:
+      - http:
+          path: /main
+          method: get
+
+custom: # Add custom section and include webpack configuration
+    webpack:
+      webpackConfig: 'webpack.config.js'
+      includeModules: false
